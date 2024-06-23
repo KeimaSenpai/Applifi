@@ -8,7 +8,7 @@ user_windows = os.environ.get("USERNAME")
 config_directory = f"C://Users//{user_windows}//Apple"
 config_file = os.path.join(config_directory, "config.json")
 ipatool_path = os.path.join(config_directory, "ipatool.exe")
-ipatool_download_url = "URL_DE_DESCARGA_DEL_IPATOOL_EXE"  # Reemplazar con la URL real
+ipatool_download_url = "https://github.com/KeimaSenpai/Applifi/releases/download/0.0.1/ipatool.exe"  # Reemplazar con la URL real
 
 # Función para guardar la configuración en el archivo JSON
 def save_config(user, password, page):
@@ -151,7 +151,7 @@ download_button = ft.IconButton(
 )
 
 # Barra de progreso para la descarga
-progress_ring = ft.ProgressRing(width=30, height=30, visible=not os.path.exists(ipatool_path))
+progress_ring = ft.ProgressRing(width=30, height=30, visible=not os.path.exists(ipatool_path), color='#5B0098')
 
 # Desactivar el botón de guardar si ipatool.exe no está presente
 save_button.enabled = os.path.exists(ipatool_path)

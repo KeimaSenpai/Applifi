@@ -21,7 +21,7 @@ search_term = ft.TextField(
     ),
 )
 
-progress_bar = ft.ProgressBar(width=250, value=0)
+progress_bar = ft.ProgressBar(width=250, value=0, color='#5B0098')
 
 def update_progress_bar(page, progress):
     progress_bar.value = progress
