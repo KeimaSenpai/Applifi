@@ -17,7 +17,7 @@ def create_config(user, password, route):
     }
     with open(config_file, 'w') as json_file:
         json.dump(config, json_file, indent=4)
-    print(f"Configuración guardada en {config_file}")
+    # print(f"Configuración guardada en {config_file}")
 
 def load_config():
     if os.path.exists(config_file):
@@ -28,19 +28,15 @@ def load_config():
 
 def run_command(command):
     try:
-        result = subprocess.run(command, check=True, text=True, capture_output=True)
+        result = subprocess.run(command, check=True, text=True, capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
         return result.stdout
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred: {e}")
+        # print(f"An error occurred: {e}")
         return None
 
 def authenticate(config, user, password):
     login_command = [config['route'], "auth", "login", "-e", user, "-p", password, "--non-interactive", "--keychain-passphrase", '0000']
     output = run_command(login_command)
-    if output:
-        print("Authenticated successfully.")
-    else:
-        print("Authentication failed.")
 
 def extract_value(output, key):
     key_str = f'"{key}":"'
@@ -61,11 +57,11 @@ def search_app(config, term, limit=1):
 def download_app(config, bundle_id, name, version, progress_callback=None):
     if bundle_id and name and version:
         download_command = [config['route'], "download", "-b", bundle_id, "--output", f"{name} v{version}.ipa", "--non-interactive", "--keychain-passphrase", '0000']
-        process = subprocess.Popen(download_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(download_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
 
         for line in process.stdout:
             decoded_line = line.decode('utf-8').strip()
-            print(decoded_line)
+            # print(decoded_line)
             if "Downloading" in decoded_line:
                 percentage = float(decoded_line.split('%')[0].split()[-1]) / 100.0
                 if progress_callback:
@@ -75,24 +71,24 @@ def download_app(config, bundle_id, name, version, progress_callback=None):
         process.wait()
         
         if process.returncode == 0:
-            print(f"Download of {name} v{version} completed successfully.")
+            # print(f"Download of {name} v{version} completed successfully.")
             if progress_callback:
                 progress_callback(1.0)
         else:
-            print(f"Download of {name} v{version} failed.")
+            # print(f"Download of {name} v{version} failed.")
             if progress_callback:
                 progress_callback(0.0)
-    else:
-        print("Could not extract all values.")
+    # else:
+    #     print("Could not extract all values.")
 
 if __name__ == "__main__":
     config = load_config()
 
     if not config:
         route = './assets/ipatool.exe'
-        user = input('Introduce el usuario: ')
-        password = input('Introduce la contraseña: ')
-        create_config(user, password, route)
+        # user = input('Introduce el usuario: ')
+        # password = input('Introduce la contraseña: ')
+        # create_config(user, password, route)
         config = load_config()
     else:
         user = config.get('user')
