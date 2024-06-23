@@ -1,0 +1,55 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.11.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.6
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Build with pyinstaller
+      run: |
+        flet pack  main.py --name Applifi --onedir --icon icon_windows.ico --product-name Applifi --add-data "assets;assets" --product-version "1.0.1" --copyright "Copyright (c) 2024 KeimaSenpai"
+    - name: Compress folder
+      shell: powershell
+      run: |
+        Compress-Archive -Path dist/Applifi -DestinationPath Applifi-Windows.zip
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        tag_name: v1.0.1
+        release_name:  v1.0.1
+        body: |
+          ## 🚀 Funciones
+          - Todavía en BETA
+          ------
+          ## 📑Próximamente
+          - Versiones para Linux y MACOS
+          ------
+          ## 🐛Se corrigieron los siguientes bugs
+          - El bug de la consola cuando se descarga
+          
+          ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KeimaSenpai/Applifi/total?style=for-the-badge&label=Download&color=%23756AB6)
+        draft: false
+        prerelease: true
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Applifi-Windows.zip
+        asset_name: Applifi-Windows.zip
+        asset_content_type: application/zip
