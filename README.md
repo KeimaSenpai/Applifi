@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/KeimaSenpai/Applifi/releases">
-    <img src="btn.webp" alt="Download" height="20">
+    <img src="btn.webp" alt="Download" height="35">
   </a>
 </p>
 

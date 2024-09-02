@@ -7,7 +7,7 @@ import threading
 title = ft.Text('Applifi')
 
 search_term = ft.TextField(
-    hint_text="App Name",
+    hint_text="App URL",
     width=250,
     height=50,
     bgcolor='#343434',
