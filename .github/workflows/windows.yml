@@ -17,7 +17,7 @@ jobs:
         pip install -r requirements.txt
     - name: Build with pyinstaller
       run: |
-        flet pack  main.py --name Applifi --onedir --icon icon_windows.ico --product-name Applifi --add-data "assets;assets" --product-version "1.0.1" --copyright "Copyright (c) 2024 KeimaSenpai"
+        flet pack  main.py --name Applifi --onedir --icon icon_windows.ico --product-name Applifi --add-data "assets;assets" --product-version "1.1.0" --copyright "Copyright (c) 2024 KeimaSenpai"
     - name: Compress folder
       shell: powershell
       run: |
@@ -28,17 +28,20 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
-        tag_name: v1.0.1
-        release_name:  v1.0.1
+        tag_name: v1.1.0
+        release_name:  v1.1.0
         body: |
           ## 🚀 Funciones
-          - Todavía en BETA
+          - Ya no esta en beta la app
+          - La app ya tiene para poner una url de la AppStore de la app que quieras bajar
+          - Muestra un texto con animacion para saber que se esta bajando la app
           ------
           ## 📑Próximamente
           - Versiones para Linux y MACOS
           ------
           ## 🐛Se corrigieron los siguientes bugs
           - El bug de la consola cuando se descarga
+          - No mostraba todas las apps con ese respectivo nombre
           
           ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/KeimaSenpai/Applifi/total?style=for-the-badge&label=Download&color=%23756AB6)
         draft: false

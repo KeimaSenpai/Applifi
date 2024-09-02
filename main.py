@@ -5,7 +5,7 @@ from views.setting import setting_page
 def main(page: ft.Page):
     page.title = "Applifi"
     page.window_width = 770
-    page.window_height = 479
+    page.window_height = 495
     page.window_resizable = False
     page.padding = 0
     page.fonts = {
@@ -13,6 +13,8 @@ def main(page: ft.Page):
         "nunito": "fonts/Nunito-VariableFont_wght.ttf",
     }
     page.theme = ft.Theme(font_family="nunito_dun")
+
+
 
     logo = ft.Container(
         content=ft.Image(src="img/logo.png", height=45, width=45),
