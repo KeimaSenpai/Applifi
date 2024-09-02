@@ -6,6 +6,16 @@
 
 > Applifi es una app para Windows que permite a los usuarios de Windows poder descargar de la AppStore apps de Apple, en este caso se usa la herramienta creada en el lenguaje Go llamada ipatools para descargar las app.
 
+<div align="center">
+    <img src="icon_windows.ico" alt="Applifi" height="100">
+</div>
+
+<p align="center">
+  <a href="https://github.com/KeimaSenpai/Applifi/releases">
+    <img src="btn.webp" alt="Download" height="20">
+  </a>
+</p>
+
 ## 🔩Para compilar la app
 
 - Primero debes de clonar el repo
@@ -45,13 +55,5 @@ flet pack  main.py --name Applifi --onedir --icon icon_windows.ico --product-nam
 [![Contributors](https://contrib.rocks/image?repo=KeimaSenpai/Applifi)](https://github.com/KeimaSenpai/Applifi/graphs/contributors)
 
 
-<div align="center">
-    <img src="icon_windows.ico" alt="Applifi" height="100">
-</div>
 
-<p align="center">
-  <a href="https://github.com/KeimaSenpai/Applifi/releases">
-    <img src="btn.webp" alt="Download" height="50">
-  </a>
-</p>
 
